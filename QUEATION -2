@@ -1,0 +1,25 @@
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+X = np.array([
+    [5, 4],
+    [4, 3],
+    [6, 5],
+    [1, 0],
+    [0, 1],
+    [2, 1],
+    [5, 3],
+    [1, 1]
+])
+y = np.array([1, 1, 1, 0, 0, 0, 1, 0])
+model = LogisticRegression()
+model.fit(X, y)
+new_email = [[3, 2]]
+prediction = model.predict(new_email)
+print("LINEAR CLASSIFICATION")
+print("-------------------------")
+print("Coefficients:", model.coef_)
+print("Intercept:", model.intercept_)
+if prediction[0] == 1:
+    print("New Email: SPAM")
+else:
+    print("New Email: NON-SPAM")
