@@ -1,0 +1,30 @@
+import pandas as pd
+from sklearn.naive_bayes import GaussianNB
+data = {
+    "Fever":    [1, 1, 0, 1, 0, 1, 0, 1],
+    "Cough":    [1, 0, 1, 1, 0, 1, 0, 0],
+    "Headache": [1, 1, 1, 0, 0, 1, 0, 1],
+    "Flu":      [1, 1, 0, 1, 0, 1, 0, 1]
+}
+df = pd.DataFrame(data)
+X = df[["Fever", "Cough", "Headache"]]
+y = df["Flu"]
+model = GaussianNB()
+model.fit(X, y)
+new_patient = [[1, 1, 0]]
+prediction = model.predict(new_patient)
+probability = model.predict_proba(new_patient)
+print("NAIVE BAYES CLASSIFICATION")
+print("-------------------------")
+print("Prior Probabilities:")
+print("No Flu :", round(model.class_prior_[0], 2))
+print("Flu    :", round(model.class_prior_[1], 2))
+print("\nNew Patient:")
+print("Fever = 1, Cough = 1, Headache = 0")
+if prediction[0] == 1:
+    print("Prediction: FLU")
+else:
+    print("Prediction: NO FLU")
+
+print("\nProbability of No Flu:", round(probability[0][0], 4))
+print("Probability of Flu:", round(probability[0][1], 4))
